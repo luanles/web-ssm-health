@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heitian.ssm.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.heitian.ssm.model.User">
+        <id column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+        <result column="user_university" jdbcType="INTEGER" property="userUniversity" />
+        <result column="user_school" jdbcType="INTEGER" property="userSchool" />
+        <result column="is_warn" jdbcType="VARCHAR" property="isWarn" />
+        <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, user_name, user_sex, user_university, user_school, is_warn, user_phone,
+        user_password
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectUserByIdAndPassword" resultMap="BaseResultMap">
+        SELECT * FROM user
+        WHERE user_id = #{userId} AND user_password = #{userPassword}
+    </select>
+
+    <select id="selectUserByUniversityAndSchool" resultMap="BaseResultMap">
+        SELECT * FROM user
+        WHERE user_school = #{userSchool} AND user_university = #{userUniversity}
+    </select>
+
+    <select id="selectAllUser" resultMap="BaseResultMap">
+        SELECT * FROM user
+    </select>
+
+    <delete id="deleteByPrimaryKey" >
+        delete from user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.heitian.ssm.model.User">
+        insert into user (user_id, user_name, user_sex,
+        user_university, user_school, is_warn,
+        user_phone, user_password)
+        values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR},
+        #{userUniversity,jdbcType=INTEGER}, #{userSchool,jdbcType=INTEGER}, #{isWarn,jdbcType=VARCHAR},
+        #{userPhone,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.heitian.ssm.model.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userSex != null">
+                user_sex,
+            </if>
+            <if test="userUniversity != null">
+                user_university,
+            </if>
+            <if test="userSchool != null">
+                user_school,
+            </if>
+            <if test="isWarn != null">
+                is_warn,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userPassword != null">
+                user_password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                #{userSex,jdbcType=VARCHAR},
+            </if>
+            <if test="userUniversity != null">
+                #{userUniversity,jdbcType=INTEGER},
+            </if>
+            <if test="userSchool != null">
+                #{userSchool,jdbcType=INTEGER},
+            </if>
+            <if test="isWarn != null">
+                #{isWarn,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.heitian.ssm.model.User">
+        update user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                user_sex = #{userSex,jdbcType=VARCHAR},
+            </if>
+            <if test="userUniversity != null">
+                user_university = #{userUniversity,jdbcType=INTEGER},
+            </if>
+            <if test="userSchool != null">
+                user_school = #{userSchool,jdbcType=INTEGER},
+            </if>
+            <if test="isWarn != null">
+                is_warn = #{isWarn,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                user_phone = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                user_password = #{userPassword,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.heitian.ssm.model.User">
+        update user
+        set user_name = #{userName,jdbcType=VARCHAR},
+        user_sex = #{userSex,jdbcType=VARCHAR},
+        user_university = #{userUniversity,jdbcType=INTEGER},
+        user_school = #{userSchool,jdbcType=INTEGER},
+        is_warn = #{isWarn,jdbcType=VARCHAR},
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+        user_password = #{userPassword,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

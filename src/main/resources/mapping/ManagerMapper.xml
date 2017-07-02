@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heitian.ssm.dao.ManagerDao">
+
+    <resultMap id="BaseResultMap" type="com.heitian.ssm.model.Manager">
+        <id column="m_id" jdbcType="VARCHAR" property="mId" />
+        <result column="m_name" jdbcType="VARCHAR" property="mName" />
+        <result column="m_sex" jdbcType="VARCHAR" property="mSex" />
+        <result column="m_university" jdbcType="VARCHAR" property="mUniversity" />
+        <result column="m_school" jdbcType="VARCHAR" property="mSchool" />
+        <result column="m_key" jdbcType="INTEGER" property="mKey" />
+        <result column="m_phone" jdbcType="VARCHAR" property="mPhone" />
+        <result column="m_password" jdbcType="VARCHAR" property="mPassword" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        m_id, m_name, m_sex, m_university, m_school, m_key, m_phone, m_password
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from manager
+        where m_id = #{mId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByIdAndPassword" resultMap="BaseResultMap">
+        SELECT * FROM manager
+        WHERE m_id = #{mId} AND m_password = #{mPassword}
+    </select>
+
+    <select id="selectByIsKey" resultMap="BaseResultMap">
+        SELECT * FROM manager
+        WHERE m_key = #{mKey}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from manager
+        where m_id = #{mId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.heitian.ssm.model.Manager">
+        insert into manager (m_id, m_name, m_sex,
+        m_university, m_school, m_key,
+        m_phone, m_password)
+        values (#{mId,jdbcType=VARCHAR}, #{mName,jdbcType=VARCHAR}, #{mSex,jdbcType=VARCHAR},
+        #{mUniversity,jdbcType=VARCHAR}, #{mSchool,jdbcType=VARCHAR}, #{mKey,jdbcType=INTEGER},
+        #{mPhone,jdbcType=VARCHAR}, #{mPassword,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.heitian.ssm.model.Manager">
+        insert into manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mId != null">
+                m_id,
+            </if>
+            <if test="mName != null">
+                m_name,
+            </if>
+            <if test="mSex != null">
+                m_sex,
+            </if>
+            <if test="mUniversity != null">
+                m_university,
+            </if>
+            <if test="mSchool != null">
+                m_school,
+            </if>
+            <if test="mKey != null">
+                m_key,
+            </if>
+            <if test="mPhone != null">
+                m_phone,
+            </if>
+            <if test="mPassword != null">
+                m_password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mId != null">
+                #{mId,jdbcType=VARCHAR},
+            </if>
+            <if test="mName != null">
+                #{mName,jdbcType=VARCHAR},
+            </if>
+            <if test="mSex != null">
+                #{mSex,jdbcType=VARCHAR},
+            </if>
+            <if test="mUniversity != null">
+                #{mUniversity,jdbcType=VARCHAR},
+            </if>
+            <if test="mSchool != null">
+                #{mSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="mKey != null">
+                #{mKey,jdbcType=INTEGER},
+            </if>
+            <if test="mPhone != null">
+                #{mPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="mPassword != null">
+                #{mPassword,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.heitian.ssm.model.Manager">
+        update manager
+        <set>
+            <if test="mName != null">
+                m_name = #{mName,jdbcType=VARCHAR},
+            </if>
+            <if test="mSex != null">
+                m_sex = #{mSex,jdbcType=VARCHAR},
+            </if>
+            <if test="mUniversity != null">
+                m_university = #{mUniversity,jdbcType=VARCHAR},
+            </if>
+            <if test="mSchool != null">
+                m_school = #{mSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="mKey != null">
+                m_key = #{mKey,jdbcType=INTEGER},
+            </if>
+            <if test="mPhone != null">
+                m_phone = #{mPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="mPassword != null">
+                m_password = #{mPassword,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where m_id = #{mId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.heitian.ssm.model.Manager">
+        update manager
+        set m_name = #{mName,jdbcType=VARCHAR},
+        m_sex = #{mSex,jdbcType=VARCHAR},
+        m_university = #{mUniversity,jdbcType=VARCHAR},
+        m_school = #{mSchool,jdbcType=VARCHAR},
+        m_key = #{mKey,jdbcType=INTEGER},
+        m_phone = #{mPhone,jdbcType=VARCHAR},
+        m_password = #{mPassword,jdbcType=VARCHAR}
+        where m_id = #{mId,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

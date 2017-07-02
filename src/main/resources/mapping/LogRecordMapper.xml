@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heitian.ssm.dao.LogRecordDao">
+
+    <resultMap id="BaseResultMap" type="com.heitian.ssm.model.LogRecord">
+        <id column="log_id" jdbcType="INTEGER" property="logId" />
+        <result column="log_time" jdbcType="TIMESTAMP" property="logTime" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="log_type" jdbcType="INTEGER" property="logType" />
+        <result column="log_result" jdbcType="INTEGER" property="logResult" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        log_id, log_time, user_id, log_type, log_result
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from log_record
+        where log_id = #{logId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT * FROM log_record
+        WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from log_record
+        where log_id = #{logId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.heitian.ssm.model.LogRecord">
+        insert into log_record (log_id, log_time, user_id,
+        log_type, log_result)
+        values (#{logId,jdbcType=INTEGER}, #{logTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR},
+        #{logType,jdbcType=INTEGER}, #{logResult,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.heitian.ssm.model.LogRecord">
+        insert into log_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logId != null">
+                log_id,
+            </if>
+            <if test="logTime != null">
+                log_time,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="logType != null">
+                log_type,
+            </if>
+            <if test="logResult != null">
+                log_result,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="logId != null">
+                #{logId,jdbcType=INTEGER},
+            </if>
+            <if test="logTime != null">
+                #{logTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="logType != null">
+                #{logType,jdbcType=INTEGER},
+            </if>
+            <if test="logResult != null">
+                #{logResult,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.heitian.ssm.model.LogRecord">
+        update log_record
+        <set>
+            <if test="logTime != null">
+                log_time = #{logTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="logType != null">
+                log_type = #{logType,jdbcType=INTEGER},
+            </if>
+            <if test="logResult != null">
+                log_result = #{logResult,jdbcType=INTEGER},
+            </if>
+        </set>
+        where log_id = #{logId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.heitian.ssm.model.LogRecord">
+        update log_record
+        set log_time = #{logTime,jdbcType=TIMESTAMP},
+        user_id = #{userId,jdbcType=VARCHAR},
+        log_type = #{logType,jdbcType=INTEGER},
+        log_result = #{logResult,jdbcType=INTEGER}
+        where log_id = #{logId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

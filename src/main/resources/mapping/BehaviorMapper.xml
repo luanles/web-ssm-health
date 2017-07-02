@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heitian.ssm.dao.BehaviorDao">
+
+    <resultMap id="BaseResultMap" type="com.heitian.ssm.model.Behavior">
+        <id column="b_id" jdbcType="INTEGER" property="bId" />
+        <result column="b_time" jdbcType="TIMESTAMP" property="bTime" />
+        <result column="b_user_id" jdbcType="VARCHAR" property="bUserId" />
+        <result column="b_r_id" jdbcType="INTEGER" property="bRId" />
+        <result column="b_type" jdbcType="INTEGER" property="bType" />
+        <result column="b_testresult" jdbcType="VARCHAR" property="bTestresult" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        b_id, b_time, b_user_id, b_r_id, b_type, b_testresult
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from behavior
+        where b_id = #{bId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectAllBehavior" resultMap="BaseResultMap">
+        SELECT * FROM behavior
+    </select>
+
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT * FROM behavior
+        WHERE b_user_id = #{userId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from behavior
+        where b_id = #{bId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.heitian.ssm.model.Behavior">
+        insert into behavior (b_id, b_time, b_user_id,
+        b_r_id, b_type, b_testresult
+        )
+        values (#{bId,jdbcType=INTEGER}, #{bTime,jdbcType=TIMESTAMP}, #{bUserId,jdbcType=VARCHAR},
+        #{bRId,jdbcType=INTEGER}, #{bType,jdbcType=INTEGER}, #{bTestresult,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.heitian.ssm.model.Behavior">
+        insert into behavior
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bId != null">
+                b_id,
+            </if>
+            <if test="bTime != null">
+                b_time,
+            </if>
+            <if test="bUserId != null">
+                b_user_id,
+            </if>
+            <if test="bRId != null">
+                b_r_id,
+            </if>
+            <if test="bType != null">
+                b_type,
+            </if>
+            <if test="bTestresult != null">
+                b_testresult,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bId != null">
+                #{bId,jdbcType=INTEGER},
+            </if>
+            <if test="bTime != null">
+                #{bTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bUserId != null">
+                #{bUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="bRId != null">
+                #{bRId,jdbcType=INTEGER},
+            </if>
+            <if test="bType != null">
+                #{bType,jdbcType=INTEGER},
+            </if>
+            <if test="bTestresult != null">
+                #{bTestresult,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.heitian.ssm.model.Behavior">
+        update behavior
+        <set>
+            <if test="bTime != null">
+                b_time = #{bTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bUserId != null">
+                b_user_id = #{bUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="bRId != null">
+                b_r_id = #{bRId,jdbcType=INTEGER},
+            </if>
+            <if test="bType != null">
+                b_type = #{bType,jdbcType=INTEGER},
+            </if>
+            <if test="bTestresult != null">
+                b_testresult = #{bTestresult,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where b_id = #{bId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.heitian.ssm.model.Behavior">
+        update behavior
+        set b_time = #{bTime,jdbcType=TIMESTAMP},
+        b_user_id = #{bUserId,jdbcType=VARCHAR},
+        b_r_id = #{bRId,jdbcType=INTEGER},
+        b_type = #{bType,jdbcType=INTEGER},
+        b_testresult = #{bTestresult,jdbcType=VARCHAR}
+        where b_id = #{bId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

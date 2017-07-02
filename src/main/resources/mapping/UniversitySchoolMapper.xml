@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heitian.ssm.dao.UniversitySchoolDao">
+    <resultMap id="BaseResultMap" type="com.heitian.ssm.model.UniversitySchool">
+        <id column="uni_id" jdbcType="INTEGER" property="uniId" />
+        <id column="sch_id" jdbcType="INTEGER" property="schId" />
+        <result column="uni_name" jdbcType="VARCHAR" property="uniName" />
+        <result column="sch_name" jdbcType="VARCHAR" property="schName" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        uni_id, sch_id, uni_name, sch_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.heitian.ssm.model.UniversitySchoolKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from university_school
+        where uni_id = #{uniId,jdbcType=INTEGER}
+        and sch_id = #{schId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByUniversityAndSchool" resultMap="BaseResultMap">
+        SELECT * FROM university_school
+        WHERE uni_name = #{uni_name} AND sch_name = #{sch_name}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.heitian.ssm.model.UniversitySchoolKey">
+        delete from university_school
+        where uni_id = #{uniId,jdbcType=INTEGER}
+        and sch_id = #{schId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.heitian.ssm.model.UniversitySchool">
+        insert into university_school (uni_id, sch_id, uni_name,
+        sch_name)
+        values (#{uniId,jdbcType=INTEGER}, #{schId,jdbcType=INTEGER}, #{uniName,jdbcType=VARCHAR},
+        #{schName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.heitian.ssm.model.UniversitySchool">
+        insert into university_school
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uniId != null">
+                uni_id,
+            </if>
+            <if test="schId != null">
+                sch_id,
+            </if>
+            <if test="uniName != null">
+                uni_name,
+            </if>
+            <if test="schName != null">
+                sch_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uniId != null">
+                #{uniId,jdbcType=INTEGER},
+            </if>
+            <if test="schId != null">
+                #{schId,jdbcType=INTEGER},
+            </if>
+            <if test="uniName != null">
+                #{uniName,jdbcType=VARCHAR},
+            </if>
+            <if test="schName != null">
+                #{schName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.heitian.ssm.model.UniversitySchool">
+        update university_school
+        <set>
+            <if test="uniName != null">
+                uni_name = #{uniName,jdbcType=VARCHAR},
+            </if>
+            <if test="schName != null">
+                sch_name = #{schName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where uni_id = #{uniId,jdbcType=INTEGER}
+        and sch_id = #{schId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.heitian.ssm.model.UniversitySchool">
+        update university_school
+        set uni_name = #{uniName,jdbcType=VARCHAR},
+        sch_name = #{schName,jdbcType=VARCHAR}
+        where uni_id = #{uniId,jdbcType=INTEGER}
+        and sch_id = #{schId,jdbcType=INTEGER}
+    </update>
+</mapper>

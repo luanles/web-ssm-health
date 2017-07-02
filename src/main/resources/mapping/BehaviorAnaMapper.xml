@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heitian.ssm.dao.BehaviorAnaDao">
+
+    <resultMap id="BaseResultMap" type="com.heitian.ssm.model.BehaviorAna">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <id column="ana_time" jdbcType="TIMESTAMP" property="anaTime" />
+        <result column="standard" jdbcType="VARCHAR" property="standard" />
+        <result column="bu_tong_zhu_ti_liu_lan_shi_chang" jdbcType="VARCHAR" property="buTongZhuTiLiuLanShiChang" />
+        <result column="bu_tong_zhu_ti_liu_lan_ci_shu" jdbcType="VARCHAR" property="buTongZhuTiLiuLanCiShu" />
+        <result column="gao_pin_dian_ji_shi_duan" jdbcType="VARCHAR" property="gaoPinDianJiShiDuan" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, ana_time, standard, bu_tong_zhu_ti_liu_lan_shi_chang, bu_tong_zhu_ti_liu_lan_ci_shu,
+        gao_pin_dian_ji_shi_duan
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="com.heitian.ssm.model.BehaviorAnaKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from behavior_ana
+        where user_id = #{userId,jdbcType=INTEGER}
+        and ana_time = #{anaTime,jdbcType=TIMESTAMP}
+    </select>
+
+    <select id="selectByUser" resultMap="BaseResultMap">
+        SELECT * FROM behavior_ana
+        WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.heitian.ssm.model.BehaviorAnaKey">
+        delete from behavior_ana
+        where user_id = #{userId,jdbcType=INTEGER}
+        and ana_time = #{anaTime,jdbcType=TIMESTAMP}
+    </delete>
+
+    <insert id="insert" parameterType="com.heitian.ssm.model.BehaviorAna">
+        insert into behavior_ana (user_id, ana_time, standard,
+        bu_tong_zhu_ti_liu_lan_shi_chang, bu_tong_zhu_ti_liu_lan_ci_shu,
+        gao_pin_dian_ji_shi_duan)
+        values (#{userId,jdbcType=INTEGER}, #{anaTime,jdbcType=TIMESTAMP}, #{standard,jdbcType=VARCHAR},
+        #{buTongZhuTiLiuLanShiChang,jdbcType=VARCHAR}, #{buTongZhuTiLiuLanCiShu,jdbcType=VARCHAR},
+        #{gaoPinDianJiShiDuan,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.heitian.ssm.model.BehaviorAna">
+        insert into behavior_ana
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="anaTime != null">
+                ana_time,
+            </if>
+            <if test="standard != null">
+                standard,
+            </if>
+            <if test="buTongZhuTiLiuLanShiChang != null">
+                bu_tong_zhu_ti_liu_lan_shi_chang,
+            </if>
+            <if test="buTongZhuTiLiuLanCiShu != null">
+                bu_tong_zhu_ti_liu_lan_ci_shu,
+            </if>
+            <if test="gaoPinDianJiShiDuan != null">
+                gao_pin_dian_ji_shi_duan,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="anaTime != null">
+                #{anaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="standard != null">
+                #{standard,jdbcType=VARCHAR},
+            </if>
+            <if test="buTongZhuTiLiuLanShiChang != null">
+                #{buTongZhuTiLiuLanShiChang,jdbcType=VARCHAR},
+            </if>
+            <if test="buTongZhuTiLiuLanCiShu != null">
+                #{buTongZhuTiLiuLanCiShu,jdbcType=VARCHAR},
+            </if>
+            <if test="gaoPinDianJiShiDuan != null">
+                #{gaoPinDianJiShiDuan,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.heitian.ssm.model.BehaviorAna">
+        update behavior_ana
+        <set>
+            <if test="standard != null">
+                standard = #{standard,jdbcType=VARCHAR},
+            </if>
+            <if test="buTongZhuTiLiuLanShiChang != null">
+                bu_tong_zhu_ti_liu_lan_shi_chang = #{buTongZhuTiLiuLanShiChang,jdbcType=VARCHAR},
+            </if>
+            <if test="buTongZhuTiLiuLanCiShu != null">
+                bu_tong_zhu_ti_liu_lan_ci_shu = #{buTongZhuTiLiuLanCiShu,jdbcType=VARCHAR},
+            </if>
+            <if test="gaoPinDianJiShiDuan != null">
+                gao_pin_dian_ji_shi_duan = #{gaoPinDianJiShiDuan,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+        and ana_time = #{anaTime,jdbcType=TIMESTAMP}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.heitian.ssm.model.BehaviorAna">
+        update behavior_ana
+        set standard = #{standard,jdbcType=VARCHAR},
+        bu_tong_zhu_ti_liu_lan_shi_chang = #{buTongZhuTiLiuLanShiChang,jdbcType=VARCHAR},
+        bu_tong_zhu_ti_liu_lan_ci_shu = #{buTongZhuTiLiuLanCiShu,jdbcType=VARCHAR},
+        gao_pin_dian_ji_shi_duan = #{gaoPinDianJiShiDuan,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=INTEGER}
+        and ana_time = #{anaTime,jdbcType=TIMESTAMP}
+    </update>
+</mapper>

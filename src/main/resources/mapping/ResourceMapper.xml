@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heitian.ssm.dao.ResourceDao">
+
+    <resultMap id="BaseResultMap" type="com.heitian.ssm.model.Resource">
+        <id column="r_id" jdbcType="INTEGER" property="rId" />
+        <result column="r_topic" jdbcType="INTEGER" property="rTopic" />
+        <result column="r_content" jdbcType="VARCHAR" property="rContent" />
+        <result column="r_title" jdbcType="VARCHAR" property="rTitle" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        r_id, r_topic, r_content, r_title
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from resource
+        where r_id = #{rId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByTopic" resultMap="BaseResultMap">
+        SELECT * FROM resource
+        WHERE r_topic = #{rTopic}
+    </select>
+
+    <select id="selectAllItem" resultMap="BaseResultMap">
+        SELECT * FROM resource
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from resource
+        where r_id = #{rId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.heitian.ssm.model.Resource">
+        insert into resource (r_id, r_topic, r_content,
+        r_title)
+        values (#{rId,jdbcType=INTEGER}, #{rTopic,jdbcType=INTEGER}, #{rContent,jdbcType=VARCHAR},
+        #{rTitle,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.heitian.ssm.model.Resource">
+        insert into resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rId != null">
+                r_id,
+            </if>
+            <if test="rTopic != null">
+                r_topic,
+            </if>
+            <if test="rContent != null">
+                r_content,
+            </if>
+            <if test="rTitle != null">
+                r_title,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rId != null">
+                #{rId,jdbcType=INTEGER},
+            </if>
+            <if test="rTopic != null">
+                #{rTopic,jdbcType=INTEGER},
+            </if>
+            <if test="rContent != null">
+                #{rContent,jdbcType=VARCHAR},
+            </if>
+            <if test="rTitle != null">
+                #{rTitle,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.heitian.ssm.model.Resource">
+        update resource
+        <set>
+            <if test="rTopic != null">
+                r_topic = #{rTopic,jdbcType=INTEGER},
+            </if>
+            <if test="rContent != null">
+                r_content = #{rContent,jdbcType=VARCHAR},
+            </if>
+            <if test="rTitle != null">
+                r_title = #{rTitle,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where r_id = #{rId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.heitian.ssm.model.Resource">
+        update resource
+        set r_topic = #{rTopic,jdbcType=INTEGER},
+        r_content = #{rContent,jdbcType=VARCHAR},
+        r_title = #{rTitle,jdbcType=VARCHAR}
+        where r_id = #{rId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="db_ssm@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="db_ssm">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="smm"/>
+    <schema id="7" parent="1" name="test"/>
+    <schema id="8" parent="1" name="blog"/>
+    <schema id="9" parent="1" name="booklog"/>
+    <schema id="10" parent="1" name="hsqbookdb"/>
+    <schema id="11" parent="1" name="mybatis"/>
+    <table id="12" parent="2" name="behavior"/>
+    <table id="13" parent="2" name="behavior_ana"/>
+    <table id="14" parent="2" name="log_record"/>
+    <table id="15" parent="2" name="manager"/>
+    <table id="16" parent="2" name="resource"/>
+    <table id="17" parent="2" name="t_user">
+      <Comment>用户登录表</Comment>
+    </table>
+    <table id="18" parent="2" name="university_school"/>
+    <table id="19" parent="2" name="user"/>
+    <column id="20" parent="12" name="b_time">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="21" parent="12" name="b_type">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="22" parent="12" name="b_testresult">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="23" parent="12" name="b_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="12" name="b_user_id">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="25" parent="12" name="b_r_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="26" parent="12" name="PRIMARY">
+      <ColNames>b_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="27" parent="13" name="ana_time">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="13" name="standard">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="29" parent="13" name="bu_tong_zhu_ti_liu_lan_shi_chang">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="30" parent="13" name="bu_tong_zhu_ti_liu_lan_ci_shu">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="31" parent="13" name="gao_pin_dian_ji_shi_duan">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="32" parent="13" name="user_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="33" parent="13" name="PRIMARY">
+      <ColNames>user_id
+ana_time</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="14" name="log_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="14" name="log_time">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="36" parent="14" name="user_id">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="37" parent="14" name="log_type">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="38" parent="14" name="log_result">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="39" parent="14" name="PRIMARY">
+      <ColNames>log_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="40" parent="15" name="m_name">
+      <Position>2</Position>
+      <DataType>varchar(25)|0</DataType>
+    </column>
+    <column id="41" parent="15" name="m_sex">
+      <Position>3</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="42" parent="15" name="m_university">
+      <Position>4</Position>
+      <DataType>varchar(25)|0</DataType>
+    </column>
+    <column id="43" parent="15" name="m_school">
+      <Position>5</Position>
+      <DataType>varchar(25)|0</DataType>
+    </column>
+    <column id="44" parent="15" name="m_key">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="45" parent="15" name="m_phone">
+      <Position>7</Position>
+      <DataType>varchar(25)|0</DataType>
+    </column>
+    <column id="46" parent="15" name="m_password">
+      <Position>8</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="15" name="m_id">
+      <Position>1</Position>
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="48" parent="15" name="PRIMARY">
+      <ColNames>m_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="49" parent="16" name="r_id">
+      <Position>1</Position>
+      <DataType>int(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="16" name="r_topic">
+      <Position>2</Position>
+      <DataType>int(10)|0</DataType>
+    </column>
+    <column id="51" parent="16" name="r_content">
+      <Position>3</Position>
+      <DataType>varchar(1000)|0</DataType>
+    </column>
+    <column id="52" parent="16" name="r_title">
+      <Position>4</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <key id="53" parent="16" name="PRIMARY">
+      <ColNames>r_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="17" name="id">
+      <Position>1</Position>
+      <DataType>bigint(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="55" parent="17" name="user_name">
+      <Position>2</Position>
+      <Comment>用户名</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="56" parent="17" name="user_phone">
+      <Position>3</Position>
+      <Comment>手机号</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="57" parent="17" name="user_email">
+      <Position>4</Position>
+      <Comment>邮箱地址</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="58" parent="17" name="user_pwd">
+      <Position>5</Position>
+      <Comment>加盐后用户密码</Comment>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <column id="59" parent="17" name="pwd_salt">
+      <Position>6</Position>
+      <Comment>MD5盐</Comment>
+      <DataType>varchar(6)|0</DataType>
+    </column>
+    <column id="60" parent="17" name="create_time">
+      <Position>7</Position>
+      <Comment>创建时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="61" parent="17" name="modify_time">
+      <Position>8</Position>
+      <Comment>最后修改时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="62" parent="17" name="is_delete">
+      <Position>9</Position>
+      <Comment>是否删除，0-未删除；1-已删除</Comment>
+      <DataType>tinyint(4)|0</DataType>
+    </column>
+    <key id="63" parent="17" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="64" parent="18" name="uni_name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="65" parent="18" name="sch_name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="66" parent="18" name="uni_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="67" parent="18" name="sch_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="68" parent="18" name="PRIMARY">
+      <ColNames>uni_id
+sch_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="69" parent="19" name="user_id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="19" name="user_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="71" parent="19" name="user_sex">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="72" parent="19" name="user_university">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="73" parent="19" name="user_school">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="74" parent="19" name="user_phone">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="75" parent="19" name="user_password">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="76" parent="19" name="is_warn">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="77" parent="19" name="PRIMARY">
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
